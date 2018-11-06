@@ -10,12 +10,13 @@ possibleMove(X, Y, NewX, NewY) :- NewX is X-2, NewY is Y+1.
 possibleMove(X, Y, NewX, NewY) :- NewX is X-2, NewY is Y-1.
 possibleMove(X, Y, NewX, NewY) :- NewX is X-1, NewY is Y+2.
 
+isValidX(Value) :- Value >= 0, Value =< 7.
+isValidY(Value) :- Value >= 0, Value =< 7.
+
 move(X, Y, NewX, NewY) :-
     possibleMove(X, Y, NewX, NewY),
-    NewX >= 0,
-    NewY >= 0,
-    NewX =< 7,
-    NewY =< 7.
+    isValidX(NewX),
+    isValidY(NewY).
 
 path(X, Y, ToX, ToY, Path) :-
     move(X, Y, TmpX, TmpY),
