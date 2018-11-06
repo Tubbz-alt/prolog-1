@@ -3,3 +3,6 @@
 % Например:
 %     ?- msum([[1, 2, 3], [], [-12, 13]], S].
 %     S = [6, 0, 1]
+
+sum([], 0).
+sum([Head|Tail], Sum) :- sum(Tail, TSum), Sum is TSum + Head.
