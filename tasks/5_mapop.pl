@@ -3,3 +3,5 @@
 % Например:
 %     ?- mapop(+, [1, 2, 3], [4, 5, 6], R).
 %     R = [5, 7, 9]
+
+compute(Op, X, Y, Result) :- Eq=..[Op, X, Y], Result is Eq.
