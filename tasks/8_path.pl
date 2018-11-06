@@ -15,12 +15,12 @@ w(0, 7).  w(1, 7).
 member(X, [Head|_]) :- X = Head, !.
 member(X, [_|Tail]) :- member(X, Tail).
 
-closest(X0, Y0, X0, Y) :- Y is Y0 + 1.
-closest(X0, Y0, X0, Y) :- Y is Y0 - 1.
-closest(X0, Y0, X, Y0) :- X is X0 + 1.
-closest(X0, Y0, X, Y0) :- X is X0 - 1.
+connected(X0, Y0, X0, Y) :- Y is Y0 + 1.
+connected(X0, Y0, X0, Y) :- Y is Y0 - 1.
+connected(X0, Y0, X, Y0) :- X is X0 + 1.
+connected(X0, Y0, X, Y0) :- X is X0 - 1.
 
-distance(X0, Y0, X, Y) :- closest(X0, Y0, X, Y), w(X, Y).
+distance(X0, Y0, X, Y) :- connected(X0, Y0, X, Y), w(X, Y).
 
 findPath(X, Y, X, Y, Path, Path).
 findPath(X0, Y0, X, Y, PrevPath, Path) :-
