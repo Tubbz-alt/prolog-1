@@ -6,3 +6,6 @@
 
 sum([], 0).
 sum([Head|Tail], Sum) :- sum(Tail, TSum), Sum is TSum + Head.
+
+msum([], []).
+msum([Head|Tail], Sum) :- sum(Head, SHead), msum(Tail, STail), append([SHead], STail, Sum).
