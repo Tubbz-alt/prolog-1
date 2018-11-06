@@ -16,3 +16,16 @@ move(X, Y, NewX, NewY) :-
     NewY >= 0,
     NewX =< 7,
     NewY =< 7.
+
+path(X, Y, ToX, ToY, Path) :-
+    move(X, Y, TmpX, TmpY),
+    TmpX = ToX,
+    TmpY = ToY,
+    Path = [[X, Y], [ToX, ToY]],
+    !.
+
+path(X, Y, ToX, ToY, Path) :-
+    move(X, Y, TmpX, TmpY),
+    From = [X, Y],
+    path(TmpX, TmpY, ToX, ToY, Path2),
+    append([From], Path2, Path).
