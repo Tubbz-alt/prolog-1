@@ -18,6 +18,8 @@ move(X, Y, NewX, NewY) :-
     isValidX(NewX),
     isValidY(NewY).
 
+path(X, Y, X, Y, Path) :- Path = [[X, Y], [X, Y]], !.
+
 path(X, Y, ToX, ToY, Path) :-
     move(X, Y, TmpX, TmpY),
     TmpX = ToX,
