@@ -4,7 +4,12 @@
 %     ?- mapop(+, [1, 2, 3], [4, 5, 6], R).
 %     R = [5, 7, 9]
 
-compute(Op, X, Y, Result) :- Eq=..[Op, X, Y], Result is Eq.
+compute(Op, X, Y, Result) :-
+    Eq=..[Op, X, Y],
+    Result is Eq.
 
 mapop(_, [], [], []) :- !.
-mapop(Op, [H1|T1], [H2|T2], Result) :- compute(Op, H1, H2, HResult), mapop(Op, T1, T2, TResult), Result = [HResult|TResult].
+mapop(Op, [H1|T1], [H2|T2], Result) :-
+    compute(Op, H1, H2, H),
+    mapop(Op, T1, T2, T),
+    Result = [H|T].
