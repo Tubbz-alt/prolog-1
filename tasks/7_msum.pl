@@ -5,7 +5,12 @@
 %     S = [6, 0, 1]
 
 sum([], 0).
-sum([Head|Tail], Sum) :- sum(Tail, TSum), Sum is TSum + Head.
+sum([H|T], Sum) :-
+    sum(T, TSum),
+    Sum is TSum + H.
 
 msum([], []).
-msum([Head|Tail], Sum) :- sum(Head, SHead), msum(Tail, STail), append([SHead], STail, Sum).
+msum([H|T], Sum) :-
+    sum(H, SumH),
+    msum(T, SumT),
+    append([SumH], SumT, Sum).
