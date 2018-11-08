@@ -12,15 +12,17 @@ w(0, 4).  w(1, 4).            w(3, 4).
 w(0, 7).  w(1, 7). 
 
 
-member(X, [Head|_]) :- X = Head, !.
-member(X, [_|Tail]) :- member(X, Tail).
+member(H, [H|_]) :- !.
+member(X, [_|T]) :- member(X, T).
 
 connected(X0, Y0, X0, Y) :- Y is Y0 + 1.
 connected(X0, Y0, X0, Y) :- Y is Y0 - 1.
 connected(X0, Y0, X, Y0) :- X is X0 + 1.
 connected(X0, Y0, X, Y0) :- X is X0 - 1.
 
-distance(X0, Y0, X, Y) :- connected(X0, Y0, X, Y), w(X, Y).
+distance(X0, Y0, X, Y) :-
+    connected(X0, Y0, X, Y),
+    w(X, Y).
 
 findPath(X, Y, X, Y, Path, Path).
 findPath(X0, Y0, X, Y, PrevPath, Path) :-
@@ -29,4 +31,5 @@ findPath(X0, Y0, X, Y, PrevPath, Path) :-
     UpdPath = [w(X1, Y1)|PrevPath],
     findPath(X1, Y1, X, Y, UpdPath, Path).
 
-path(X0, Y0, X1, Y1, Path) :- findPath(X0, Y0, X1, Y1, [], Path).
+path(X0, Y0, X1, Y1, Path) :-
+    findPath(X0, Y0, X1, Y1, [], Path).
