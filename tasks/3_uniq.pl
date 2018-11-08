@@ -5,8 +5,17 @@
 %     Z = [a, b, c, d]
 
 delete(_, [], []).
-delete(X, [X|Tail], NewList) :- delete(X, Tail, NewList), !.
-delete(X, [Head|Tail], NewList) :- delete(X, Tail, Tmp), !, NewList = [Head|Tmp].
+delete(H, [H|T], NewList) :-
+    delete(H, T, NewList),
+    !.
+delete(X, [H|T], NewList) :-
+    delete(X, T, Tmp),
+    !,
+    NewList = [H|Tmp].
 
 uniq([], []).
-uniq([Head|Tail], Unique) :- delete(Head, Tail, Cleared), !, uniq(Cleared, UTail), Unique = [Head|UTail].
+uniq([H|T], Unique) :-
+    delete(H, T, Cleared),
+    !,
+    uniq(Cleared, UT),
+    Unique = [H|UT].
