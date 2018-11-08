@@ -7,6 +7,17 @@ min(X, Y, Y) :- Y =< X.
 sublist([H|_], Len, H) :- length(H, Len).
 sublist([_|T], Len, List) :- sublist(T, Len, List).
 
+minlen([], 999).
+minlen([H|T], Min) :-
+    minlen(T, TMin),
+    length(H, HMin),
+    min(TMin, HMin, Min),
+    !.
+
+shortest(X, Shortest) :-
+    minlen(X, Len),
+    sublist(X, Len, Shortest).
+
 member(X, [Head|_]) :- X = Head, !.
 member(X, [_|Tail]) :- member(X, Tail).
 
@@ -35,7 +46,6 @@ path(From, To, PrevPath, Path) :-
     move(From, To),
     append(PrevPath, [To], Path),
     !.
-
 path(From, To, PrevPath, Path) :-
     move(From, Tmp),
     not(member(Tmp, PrevPath)),
@@ -45,12 +55,7 @@ path(From, To, PrevPath, Path) :-
 
 way(To, Way) :- path([0, 0], To, [], Way).
 
-shortway(To) :-
+shortestway(To) :-
     findall(Way, way(To, Way), Ways),
     shortest(Ways, Shortest),
     print(Shortest).
-
-minlen([], 999).
-minlen([H|T], Min) :- minlen(T, TMin), length(H, HMin), min(TMin, HMin, Min), !.
-
-shortest(X, Shortest) :- minlen(X, Len), sublist(X, Len, Shortest).
