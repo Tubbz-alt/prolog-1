@@ -6,5 +6,5 @@
 
 invert([],[]). 
 invert([H|T], Inverted) :-
-    invert(T, RevertedT),
-    append(RevertedT, [H], Inverted).
+    invert(T, RevertedTail),
+    append(RevertedTail, [H], Inverted).
