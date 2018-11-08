@@ -6,4 +6,7 @@
 
 unbr([], []) :- !.
 unbr(X, R) :- atomic(X), R = [X], !.
-unbr([Head|Tail], Result) :- unbr(Head, HResult), unbr(Tail, TResult), append(HResult, TResult, Result).
+unbr([H|T], Result) :-
+    unbr(H, ResultH),
+    unbr(T, ResultT),
+    append(ResultH, ResultT, Result).
