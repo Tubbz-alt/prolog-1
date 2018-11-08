@@ -5,4 +5,6 @@
 %     X=b
 
 invert([],[]). 
-invert([Head|Tail], Inverted) :- invert(Tail, RevertedTail), append(RevertedTail, [Head], Inverted).
+invert([H|T], Inverted) :-
+    invert(T, RevertedT),
+    append(RevertedT, [H], Inverted).
